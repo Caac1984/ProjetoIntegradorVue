@@ -13,7 +13,8 @@
                   <div v-if="!registerActive" class="card login" v-bind:class="{ error: emptyFields }">
                      <!-- Logo -->
                      <div class="logo-container">
-                        <img src="src/assets/logo.png" alt="Logo da sua empresa" class="logo">
+                        <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
+                        <hr>
                      </div>
 
                      <!-- Título do card de login -->
