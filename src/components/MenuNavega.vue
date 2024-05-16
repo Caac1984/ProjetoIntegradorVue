@@ -46,6 +46,7 @@
 <style scoped>
 .navbar {
   border-radius: 10px;
+  font-size: 18px; /* Define o tamanho do texto para 18 pixels */
 }
 
 .navbar-brand {
