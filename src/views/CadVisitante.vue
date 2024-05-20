@@ -1,6 +1,6 @@
 <template>
    <MenuNavega />
-   <div class="cadVisitante -3">
+   <div class="cadVisitante p-3">
       <!-- Agrupamento do formulário -->
       <fieldset class="p-3 col-sm-12 col-md-4">
          <h1>Cadastro do Visitante:</h1>

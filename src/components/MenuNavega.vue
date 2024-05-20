@@ -1,9 +1,10 @@
 <template>
-  <div class="container-fluid mb-3 p-3 bg-">
+  <div class="container-fluid mb-3 p-3 bg">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="@/assets/logo.png" alt="Logo" class="navbar-brand" />
-
+        <a href="/">
+          <img src="@/assets/logo.png" alt="Logo" class="navbar-brand" />
+        </a>
         <!-- Restante do seu código navbar -->
       </nav>
       <div class="container-fluid">
@@ -24,6 +25,7 @@
                 <li><router-link class="dropdown-item" to="/cadVisitante">Visitante</router-link></li>
                 <li><router-link class="dropdown-item" to="/cadAluno">Aluno</router-link></li>
                 <li><router-link class="dropdown-item" to="/cadCurso">Curso</router-link></li>
+                <li><router-link class="dropdown-item" to="/CadProjeto">Projeto</router-link></li>
                 <li><router-link class="dropdown-item" to="/cadQuesito">Quesito</router-link></li>
               </ul>
             </li>

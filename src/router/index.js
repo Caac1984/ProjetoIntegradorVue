@@ -14,28 +14,46 @@ const routes = [
       import("../views/CadProfessor.vue"),
   },
   {
-    path: "/cadvisitante",
+    path: "/CadVisitante",
     name: "cadvisitante",
     component: () =>
       import("../views/CadVisitante.vue"),
   },
   {
-    path: "/cadaluno",
+    path: "/CadAluno",
     name: "cadaluno",
     component: () =>
       import("../views/CadAluno.vue"),
   },
   {
-    path: "/cadcurso",
+    path: "/CadCurso",
     name: "cadcurso",
     component: () =>
       import("../views/CadCurso.vue"),
   },
   {
-    path: "/cadquesito",
+    path: "/CadQuesito",
     name: "cadquesito",
     component: () =>
       import("../views/CadQuesito.vue"),
+  },
+  {
+    path: "/AlterarSenha",
+    name: "alterarsenha",
+    component: () =>
+      import("../views/AlterarSenha.vue"),
+  },
+  {
+    path: "/Avaliacao",
+    name: "avaliacao",
+    component: () =>
+      import("../views/AvaliacaoView.vue"),
+  },
+  {
+    path: "/CadProjeto",
+    name: "cadprojeto",
+    component: () =>
+      import("../views/CadProjeto.vue"),
   },
  
 ];

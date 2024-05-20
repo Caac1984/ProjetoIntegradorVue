@@ -31,7 +31,7 @@
                         <input type="submit" class="btn btn-primary" @click="doLogin">
                         <br><br>
                         <!-- Link para redefinição de senha -->
-                        <p><a href="#">Esqueceu a senha?</a></p>
+                        <router-link to="/alterarsenha" target="_blank">Esqueceu a senha?</router-link>
                      </form>
                   </div>
 
@@ -60,6 +60,11 @@
 </template>
 
 <!-- Script Vue.js -->
+<script>
+export default {
+   // Seu script Vue.js aqui
+}
+</script>
 
 <!-- Estilos CSS -->
 <style scoped>
@@ -96,7 +101,9 @@ h1 {
 }
 
 .logo {
-   width: 150px; /* Define a largura da logo */
-   height: auto; /* Mantém a altura proporcional para evitar distorções */
+   width: 150px;
+   /* Define a largura da logo */
+   height: auto;
+   /* Mantém a altura proporcional para evitar distorções */
 }
 </style>

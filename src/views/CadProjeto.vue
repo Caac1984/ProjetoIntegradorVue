@@ -1,15 +1,15 @@
 <template>
   <MenuNavega />
-  <div class="cadCurso p-3">
+  <div class="cadprojeto p-3">
     <fieldset class="p-3 col-sm-12 col-md-4">
-      <h1>Cadastro do Curso:</h1>
+      <h1>Cadastro do Projeto:</h1>
       <div class="row p-2">
         <div class=" col-sm-12 col-md-9 offset-md-2">
-          <label for="curso" class="form-label">Curso:</label>
-          <input type="text" id="curso" class="form-control" v-model="curso" placeholder="Curso" />
+          <label for="projeto" class="form-label">Projeto:</label>
+          <input type="text" id="projeto" class="form-control" v-model="projeto" placeholder="Projeto" />
         </div>
       </div>
-      <div class="col col-md-4 offset-md-4 d-flex justify-content-center p-3">
+      <div class="col col-md-4 offset-md-4 d-flex justify-content-left p-3">
         <button class="btn btn-primary" @click="salvar">Salvar</button>
       </div>
     </fieldset>
@@ -26,13 +26,13 @@ export default {
 
   data() {
     return {
-      curso: "",
+      projeto: "",
     };
   },
   methods: {
     salvar() {
       // Aqui você pode adicionar a lógica para salvar os dados
-      console.log("Curso:", this.curso);
+      console.log("Projeto:", this.projeto);
     },
   },
 };
