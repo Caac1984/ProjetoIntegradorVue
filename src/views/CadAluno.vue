@@ -1,11 +1,12 @@
 <template>
+  <!-- Inclui o componente MenuNavega -->
   <MenuNavega />
   <div class="cadAluno p-3">
     <!-- Agrupamento do formulário -->
     <fieldset class="p-3 col-sm-12 col-md-4">
       <!-- Título do formulário -->
       <h1>Cadastro do Aluno:</h1>
-      <div class="row p-2 ">
+      <div class="row p-2">
         <!-- Campo de entrada para o nome -->
         <div class="col-sm-12 col-md-6 md-2">
           <label for="nome" class="form-label">Nome:</label>
@@ -18,12 +19,12 @@
         </div>
       </div>
       <div class="row p-2">
-        <!-- Campo de entrada para o nome -->
-        <div class="col-sm-12 col-md-6 ">
+        <!-- Campo de entrada para o email -->
+        <div class="col-sm-12 col-md-6">
           <label for="email" class="form-label">E-mail:</label>
           <input type="text" id="email" class="form-control" v-model="email" placeholder="E-mail" />
         </div>
-        <!-- Campo de entrada para o sobrenome -->
+        <!-- Campo de entrada para o telefone -->
         <div class="col-sm-12 col-md-6">
           <label for="telefone" class="form-label">Telefone:</label>
           <input type="text" id="telefone" class="form-control" v-model="telefone" placeholder="Telefone" />
@@ -31,7 +32,7 @@
       </div>
       <div class="row p-2">
         <!-- Campo de entrada para a disciplina -->
-        <div class="col-sm-12 col-md-6 ">
+        <div class="col-sm-12 col-md-6">
           <label for="disciplina" class="form-label">Disciplina:</label>
           <input type="text" id="disciplina" class="form-control" v-model="disciplina" placeholder="Disciplina" />
         </div>
@@ -39,6 +40,13 @@
         <div class="col-sm-12 col-md-6">
           <label for="matricula" class="form-label">Matrícula:</label>
           <input type="text" id="matricula" class="form-control" v-model="matricula" placeholder="Matrícula" />
+        </div>
+      </div>
+      <div class="row p-2">
+        <!-- Campo de entrada para o projeto -->
+        <div class="col-sm-12 col-md-6">
+          <label for="projeto" class="form-label">Projeto:</label>
+          <input type="text" id="projeto" class="form-control" v-model="projeto" placeholder="Projeto" />
         </div>
       </div>
       <div class="row">
@@ -56,33 +64,45 @@ import MenuNavega from '@/components/MenuNavega.vue'
 
 export default {
   components: {
-    MenuNavega
+    MenuNavega // Importa e registra o componente MenuNavega
   },
 
   data() {
     return {
-      nome: "",
-      sobrenome: "",
+      nome: "", // Armazena o nome do aluno
+      sobrenome: "", // Armazena o sobrenome do aluno
+      email: "", // Armazena o email do aluno
+      telefone: "", // Armazena o telefone do aluno
+      disciplina: "", // Armazena a disciplina do aluno
+      matricula: "", // Armazena a matrícula do aluno
+      projeto: "", // Armazena o projeto do aluno
     };
   },
   methods: {
     salvar() {
-      // Aqui você pode adicionar a lógica para salvar os dados
+      // Função para salvar os dados
+      // Adicione a lógica para salvar os dados conforme necessário
       console.log("Nome:", this.nome);
       console.log("Sobrenome:", this.sobrenome);
-      // Redirecionar ou fazer outras operações após salvar
+      console.log("Email:", this.email);
+      console.log("Telefone:", this.telefone);
+      console.log("Disciplina:", this.disciplina);
+      console.log("Matricula:", this.matricula);
+      console.log("Projeto:", this.projeto);
     },
   },
 };
 </script>
 
 <style scoped>
+/* Estilos para o título do formulário */
 h1 {
   width: 100%;
   text-align: center;
   color: white;
 }
 
+/* Estilos para o botão primário */
 .btn-primary {
   background-color: rgb(255, 255, 255);
   color: black;
@@ -93,17 +113,17 @@ h1 {
   color: black;
 }
 
+/* Estilos para as labels dos formulários */
 .form-label {
   margin-bottom: 5px;
   color: white;
 }
 
+/* Estilos para o fieldset do formulário */
 fieldset {
   background-color: rgba(0, 19, 3) !important;
   border-radius: 8px !important;
-  margin: 0 auto;
-  /* Centraliza o fieldset horizontalmente */
-  width: 50%;
-  /* Define a largura do fieldset */
+  margin: 0 auto; /* Centraliza o fieldset horizontalmente */
+  width: 50%; /* Define a largura do fieldset */
 }
 </style>

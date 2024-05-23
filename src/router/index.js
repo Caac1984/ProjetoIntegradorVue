@@ -55,6 +55,12 @@ const routes = [
     component: () =>
       import("../views/CadProjeto.vue"),
   },
+  {
+    path: "/tabela",
+    name: "tabela",
+    component: () =>
+      import("../views/TabelasView.vue"),
+  },
  
 ];
 

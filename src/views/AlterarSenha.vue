@@ -6,8 +6,8 @@
             <!-- Container para conteúdo -->
             <div class="container">
                 <!-- Linha da grade -->
-                <div class="row justify-content-center"> <!-- Centraliza o conteúdo horizontalmente -->
-                    <!-- Coluna responsiva -->
+                <div class="row justify-content-center">
+                    <!-- Centraliza o conteúdo horizontalmente -->
                     <div class="col-lg-4 col-md-6 col-sm-8">
                         <!-- Ajusta o tamanho da coluna em diferentes dispositivos -->
                         <!-- Card de alteração de senha -->
@@ -17,14 +17,12 @@
                                 <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
                                 <hr>
                             </div>
-
                             <!-- Título do card de alteração de senha -->
                             <h2>Confirme seu e-mail:</h2>
                             <!-- Formulário de alteração de senha -->
                             <form class="form-group" @submit.prevent="submitForm">
                                 <!-- Input de e-mail -->
-                                <input v-model="emailAltSenha" type="email" class="form-control" placeholder="E-mail"
-                                    required>
+                                <input v-model="emailAltSenha" type="email" class="form-control" placeholder="E-mail" required>
                                 <br>
                                 <!-- Botão de envio do formulário de alteração de senha -->
                                 <button type="submit" class="btn btn-primary">Enviar</button>
@@ -47,9 +45,9 @@
 export default {
     data() {
         return {
-            emailAltSenha: '',
-            emptyFields: false,
-            showAlert: false, // Variável para controlar a exibição do alerta
+            emailAltSenha: '', // Armazena o e-mail do usuário
+            emptyFields: false, // Controla a classe de erro
+            showAlert: false, // Controla a exibição do alerta
         };
     },
     methods: {
@@ -58,7 +56,7 @@ export default {
             // Aqui você pode adicionar a lógica para enviar o e-mail de alteração de senha
             // e definir showAlert como true para mostrar o alerta
             this.sendEmail(); // Supondo que você tenha um método para enviar o e-mail
-            this.showAlert = true;
+            this.showAlert = true; // Mostra o alerta
         },
         sendEmail() {
             // Lógica para enviar o e-mail
@@ -86,25 +84,21 @@ h1 {
 
 /* Estilos para grupos de formulários */
 .form-group {
-
-    /* Estilos para inputs dentro do form-group */
     input {
-        margin-bottom: 20px;
-        border-radius: 10px;
+        margin-bottom: 20px; /* Espaçamento inferior dos inputs */
+        border-radius: 10px; /* Bordas arredondadas dos inputs */
     }
 }
 
 /* Estilos para a página de alteração de senha */
 .alterarsenha-page {
-    align-items: center;
-    display: flex;
-    height: flex;
+    align-items: center; /* Centraliza verticalmente */
+    display: flex; /* Define um contêiner flexível */
+    height: flex; /* Define a altura */
 }
 
 .logo {
-    width: 150px;
-    /* Define a largura da logo */
-    height: auto;
-    /* Mantém a altura proporcional para evitar distorções */
+    width: 150px; /* Define a largura da logo */
+    height: auto; /* Mantém a altura proporcional para evitar distorções */
 }
 </style>

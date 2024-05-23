@@ -19,13 +19,6 @@
             <h1>Avaliação:</h1>
             <h6>Escolha a metéria e depois o grupo.</h6>
           
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">Cadastro</a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><router-link class="dropdown-item" to="/AvaliacaoView">Avaliação</router-link></li>
-                <li><router-link class="dropdown-item" to="/FinalistasView">Finalistas</router-link></li>
-                <li><router-link class="dropdown-item" to="/ResultadoFinal">Resultado final</router-link></li>
-              </ul>
             
           </div>
         </div>

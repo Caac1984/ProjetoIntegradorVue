@@ -29,6 +29,17 @@
                 <li><router-link class="dropdown-item" to="/cadQuesito">Quesito</router-link></li>
               </ul>
             </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Cadastrados
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                <li><router-link class="dropdown-item" to="/tabela">Cadastrados</router-link></li>
+              </ul>
+            </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
