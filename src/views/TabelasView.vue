@@ -12,14 +12,25 @@
               </div>
               <h4>Lista de Cadastros:</h4>
 
-              <!-- campo de testes -->
-
+              <!-- Campo de seleção -->
               <div class="w-50 p-2 mb-3 text-light">
-                <b-form-select v-model="selected" :options="options"></b-form-select>
+                <b-form-select v-model="selected" :options="options" @change="fetchCadastros"></b-form-select>
               </div>
 
-              <!-- campo de testes -->
-
+              <!-- Tabela de cadastros -->
+              <div v-if="selected">
+                <b-table striped hover :items="cadastros[selected]" :fields="fields" :sort-by="sortBy" :sort-desc="sortDesc">
+                  <template #cell(edit)="row">
+                    <b-button @click="editCadastro(row.item)">Editar</b-button>
+                  </template>
+                  <template #cell(excluir)="row">
+                    <b-button @click="excluirCadastro(row.item)">Excluir</b-button>
+                  </template>
+                </b-table>
+              </div>
+              <div v-else>
+                <p>Por favor, selecione um item para visualizar os cadastros.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -38,17 +49,54 @@ export default {
 
   data() {
     return {
-      compatConfig: { MODE: 3 },
       selected: null,
       options: [
         { value: null, text: 'Por favor, selecionar um item:' },
         { value: 'Cadastro de Professor', text: 'Cadastro de Professor' },
         { value: 'Cadastro de Aluno', text: 'Cadastro de Aluno' },
         { value: 'Cadastro de Visitante', text: 'Cadastro de Visitante' },
-      ]
+      ],
+      cadastros: [],
+      sortBy: '',
+      sortDesc: false,
+      fields: [
+        { key: 'nome', label: 'Nome', sortable: true },
+        { key: 'sobrenome', label: 'Sobrenome', sortable: true },
+        { key: 'email', label: 'E-mail', sortable: true },
+        { key: 'telefone', label: 'Telefone', sortable: true },
+        { key: 'disciplina', label: 'Disciplina', sortable: true },
+        { key: 'matricula', label: 'Matrícula', sortable: true },
+        { key: 'projeto', label: 'Projeto', sortable: true },
+        { key: 'edit', label: 'Editar' },
+        { key: 'excluir', label: 'Excluir' },
+      ],
     };
-  }
+  },
 
+  methods: {
+    fetchCadastros() {
+      if (this.selected) {
+        fetch(`http://localhost:3000/cadastros/${this.selected}`)
+          .then(response => response.json())
+          .then(data => {
+            this.cadastros = data;
+          })
+          .catch(error => {
+            console.error('Erro ao buscar cadastros:', error);
+          });
+      }
+    },
+
+    editCadastro(cadastro) {
+      // Lógica para editar o cadastro
+      console.log('Editando cadastro:', cadastro);
+    },
+
+    excluirCadastro(cadastro) {
+      // Lógica para excluir o cadastro
+      console.log('Excluindo cadastro:', cadastro);
+    }
+  }
 };
 </script>
 
