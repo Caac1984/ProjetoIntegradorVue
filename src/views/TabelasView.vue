@@ -1,15 +1,21 @@
 <template>
+  <!-- Componente raiz -->
   <div>
+    <!-- Componente de menu de navegação -->
     <MenuNavega />
+
+    <!-- Contêiner da tabela -->
     <div class="tabela">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-9 col-md-9 col-sm-9">
             <div class="card login">
+              <!-- Container do logo -->
               <div class="logo-container">
                 <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
-                <hr>
+                <hr> <!-- Linha separadora -->
               </div>
+              <!-- Título da página -->
               <h4>Lista de Cadastros:</h4>
 
               <!-- Campo de seleção -->
@@ -19,16 +25,21 @@
 
               <!-- Tabela de cadastros -->
               <div v-if="selected">
-                <b-table striped hover :items="cadastros[selected]" :fields="fields" :sort-by="sortBy" :sort-desc="sortDesc">
+                <!-- Tabela usando b-table do BootstrapVue -->
+                <b-table striped hover :items="cadastros[selected]" :fields="fields" :sort-by="sortBy"
+                  :sort-desc="sortDesc">
+                  <!-- Template para a coluna de editar -->
                   <template #cell(edit)="row">
                     <b-button @click="editCadastro(row.item)">Editar</b-button>
                   </template>
+                  <!-- Template para a coluna de excluir -->
                   <template #cell(excluir)="row">
                     <b-button @click="excluirCadastro(row.item)">Excluir</b-button>
                   </template>
                 </b-table>
               </div>
               <div v-else>
+                <!-- Mensagem para quando nenhum item estiver selecionado -->
                 <p>Por favor, selecione um item para visualizar os cadastros.</p>
               </div>
             </div>
@@ -49,17 +60,17 @@ export default {
 
   data() {
     return {
-      selected: null,
-      options: [
+      selected: null, // Item selecionado no campo de seleção
+      options: [ // Opções para o campo de seleção
         { value: null, text: 'Por favor, selecionar um item:' },
         { value: 'Cadastro de Professor', text: 'Cadastro de Professor' },
         { value: 'Cadastro de Aluno', text: 'Cadastro de Aluno' },
         { value: 'Cadastro de Visitante', text: 'Cadastro de Visitante' },
       ],
-      cadastros: [],
-      sortBy: '',
-      sortDesc: false,
-      fields: [
+      cadastros: [], // Array de cadastros
+      sortBy: '', // Campo usado para ordenar a tabela
+      sortDesc: false, // Flag para ordenação descendente
+      fields: [ // Configuração das colunas da tabela
         { key: 'nome', label: 'Nome', sortable: true },
         { key: 'sobrenome', label: 'Sobrenome', sortable: true },
         { key: 'email', label: 'E-mail', sortable: true },
@@ -67,13 +78,14 @@ export default {
         { key: 'disciplina', label: 'Disciplina', sortable: true },
         { key: 'matricula', label: 'Matrícula', sortable: true },
         { key: 'projeto', label: 'Projeto', sortable: true },
-        { key: 'edit', label: 'Editar' },
-        { key: 'excluir', label: 'Excluir' },
+        { key: 'edit', label: 'Editar' }, // Coluna para botão de editar
+        { key: 'excluir', label: 'Excluir' }, // Coluna para botão de excluir
       ],
     };
   },
 
   methods: {
+    // Método para buscar os cadastros quando o item selecionado muda
     fetchCadastros() {
       if (this.selected) {
         fetch(`http://localhost:3000/cadastros/${this.selected}`)
@@ -87,11 +99,13 @@ export default {
       }
     },
 
+    // Método para editar um cadastro
     editCadastro(cadastro) {
       // Lógica para editar o cadastro
       console.log('Editando cadastro:', cadastro);
     },
 
+    // Método para excluir um cadastro
     excluirCadastro(cadastro) {
       // Lógica para excluir o cadastro
       console.log('Excluindo cadastro:', cadastro);
@@ -101,6 +115,7 @@ export default {
 </script>
 
 <style scoped>
+/* Estilos CSS específicos para este componente */
 h1 {
   color: black;
 }
