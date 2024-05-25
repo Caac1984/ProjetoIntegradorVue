@@ -1,6 +1,7 @@
 <template>
    <!-- Inclui o componente de navegação -->
    <MenuNavega />
+   <!-- Início do formulário de cadastro do professor -->
    <div class="cadVisitante p-3">
       <!-- Agrupamento do formulário -->
       <fieldset class="p-3 col-sm-12 col-md-4">
@@ -128,15 +129,4 @@ fieldset {
    width: 50%; /* Define a largura do fieldset */
 }
 
-/* Estilos para os campos de entrada do formulário */
-.form-control {
-   width: 100%; /* Define a largura do input como 100% */
-   font-size: 16px; /* Define o tamanho da fonte do input */
-   padding: 8px; /* Adiciona um espaçamento interno ao redor do texto no input */
-   box-sizing: border-box; /* Garante que o padding não afete a largura total do input */
-   text-align: left; /* Alinha o texto à esquerda */
-   align-items: flex-start; /* Alinha o texto ao topo verticalmente */
-   resize: vertical; /* Permite o redimensionamento vertical */
-   min-height: 40px; /* Altura mínima para garantir que o textarea seja visível */
-}
 </style>

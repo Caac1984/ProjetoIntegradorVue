@@ -1,46 +1,126 @@
 <template>
-  <MenuNavega />
-  <div class="avaliacao">
-   
-    <div class="container">
-      <!-- Linha da grade -->
-      <div class="row justify-content-center"> <!-- Centraliza o conteúdo horizontalmente -->
-        <!-- Coluna responsiva -->
-        <div class="col-lg-4 col-md-6 col-sm-8"> <!-- Ajusta o tamanho da coluna em diferentes dispositivos -->
-          <!-- Card de login -->
-          <div class="card login">
-            <!-- Logo -->
-            <div class="logo-container">
-              <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
-              <hr>
-            </div>
+  <!-- Componente raiz -->
+  <div>
+    <!-- Componente de menu de navegação -->
+    <MenuNavega />
 
-            <!-- Formulário de login -->
-            <h1>Avaliação:</h1>
-            <h6>Escolha a metéria e depois o grupo.</h6>
-          
-            
+    <!-- Contêiner da tabela -->
+    <div class="tabela">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="card login">
+              <!-- Container do logo -->
+              <div class="logo-container">
+                <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
+                <hr> <!-- Linha separadora -->
+              </div>
+              <!-- Título da página -->
+              <h4>Avaliação:</h4>
+
+              <!-- Campo de seleção de curso -->
+              <div class="w-50 p-2 mb-3 text-light">
+                <b-form-select v-model="selectedCurso" :options="optionsCurso" @change="fetchProjetos"></b-form-select>
+              </div>
+
+              <!-- Campo de seleção de projeto -->
+              <div v-if="selectedCurso" class="w-50 p-2 mb-3 text-light">
+                <b-form-select v-model="selectedProjeto" :options="optionsProjeto" @change="fetchCadastros"></b-form-select>
+              </div>
+
+              <!-- Tabela de cadastros -->
+              <div v-if="selectedProjeto">
+                <!-- Tabela usando b-table do BootstrapVue -->
+                <b-table striped hover :items="cadastros" :fields="fields">
+                </b-table>
+              </div>
+              <div v-else>
+                <!-- Mensagem para quando nenhum item estiver selecionado -->
+                <p>Por favor, selecione uma opção.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </template>
 
 <script>
-import MenuNavega from '@/components/MenuNavega.vue'
+import MenuNavega from '@/components/MenuNavega.vue';
 
 export default {
   components: {
     MenuNavega
   },
+
+  data() {
+    return {
+      selectedCurso: null, // Curso selecionado no campo de seleção
+      selectedProjeto: null, // Projeto selecionado no campo de seleção
+      optionsCurso: [ // Opções para o campo de seleção de curso
+        { value: null, text: 'Por favor, selecione um curso:' },
+        { value: 'this.selectedCurso', text: '' },
+      ],
+      optionsProjeto: [], // Opções para o campo de seleção de projeto
+      cadcadastros: [], // Array de cadastros
+      fields: [ // Configuração das colunas da tabela
+        { key: 'curso', label: 'Curso'},
+        { key: 'projeto', label: 'Projeto'},
+      ],
+    };
+  },
+
+  methods: {
+    // Método para buscar os projetos quando o curso selecionado muda
+    fetchProjetos() {
+      if (this.selectedCurso) {
+        fetch(`http://localhost:3000/projetos/${this.selectedCurso}`)
+          .then(response => response.json())
+          .then(data => {
+            this.optionsProjeto = data.map(projeto => ({ value: projeto.id, text: projeto.nome }));
+            this.selectedProjeto = null; // Reseta o projeto selecionado ao mudar de curso
+          })
+          .catch(error => {
+            console.error('Erro ao buscar projetos:', error);
+          });
+      } else {
+        this.optionsProjeto = [];
+        this.selectedProjeto = null;
+      }
+    },
+
+    // Método para buscar os cadastros quando o projeto selecionado muda
+    fetchCadastros() {
+      if (this.selectedProjeto) {
+        fetch(`http://localhost:3000/cadastros/${this.selectedProjeto}`)
+          .then(response => response.json())
+          .then(data => {
+            this.cadastros = data;
+          })
+          .catch(error => {
+            console.error('Erro ao buscar cadastros:', error);
+          });
+      } else {
+        this.cadastros = [];
+      }
+    },
+
+    editCadastro(cadastro) {
+      // Lógica para editar o cadastro
+      console.log('Editando cadastro:', cadastro);
+    },
+
+    excluirCadastro(cadastro) {
+      // Lógica para excluir o cadastro
+      console.log('Excluindo cadastro:', cadastro);
+    }
+  }
 };
 </script>
 
 <style scoped>
+/* Estilos CSS específicos para este componente */
 h1 {
   color: black;
 }
@@ -51,9 +131,7 @@ h1 {
 
 .logo {
   width: 150px;
-  /* Define a largura da logo */
   height: auto;
-  /* Mantém a altura proporcional para evitar distorções */
 }
 
 /* Estilos para elementos de texto */
@@ -72,13 +150,9 @@ h1 {
 }
 
 /* Estilos para grupos de formulários */
-.form-group {
-
-  /* Estilos para inputs dentro do form-group */
-  input {
-    margin-bottom: 20px;
-    border-radius: 10px;
-  }
+.form-group input {
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 /* Estilos para a página de login */
@@ -86,12 +160,5 @@ h1 {
   align-items: center;
   display: flex;
   height: flex;
-}
-
-.logo {
-  width: 150px;
-  /* Define a largura da logo */
-  height: auto;
-  /* Mantém a altura proporcional para evitar distorções */
 }
 </style>
