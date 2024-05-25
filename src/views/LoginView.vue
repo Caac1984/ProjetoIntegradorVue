@@ -20,7 +20,7 @@
                      <!-- Título do card de login -->
                      <h2>Login</h2>
                      <!-- Formulário de login -->
-                     <form class="form-group">
+                     <form class="form-group" @submit.prevent="doLogin">
                         <!-- Input de e-mail -->
                         <input v-model="emailLogin" type="email" class="form-control" placeholder="E-mail" required>
                         <br>
@@ -28,7 +28,7 @@
                         <input v-model="senhaLogin" type="password" class="form-control" placeholder="Senha" required>
                         <br>
                         <!-- Botão de envio do formulário de login -->
-                        <input type="submit" class="btn btn-primary" @click="doLogin">
+                        <input type="submit" class="btn btn-primary" value="Login">
                         <br><br>
                         <!-- Link para redefinição de senha -->
                         <router-link to="/alterarsenha" target="_blank">Esqueceu a senha?</router-link>
@@ -40,7 +40,7 @@
                      <!-- Título do card de registro -->
                      <h1>Sign Up</h1>
                      <!-- Formulário de registro -->
-                     <form class="form-group">
+                     <form class="form-group" @submit.prevent="doRegister">
                         <!-- Input de e-mail para registro -->
                         <input v-model="emailReg" type="email" class="form-control" placeholder="E-mail" required>
                         <!-- Input de senha para registro -->
@@ -48,8 +48,15 @@
                         <!-- Input de confirmação de senha -->
                         <input v-model="confirmReg" type="password" class="form-control" placeholder="Confirma Senha" required>
                         <!-- Botão de envio do formulário de registro -->
-                        <input type="submit" class="btn btn-primary" @click="doRegister">
+                        <input type="submit" class="btn btn-primary" value="Registrar">
                      </form>
+                     <!-- Botão para alternar para a visualização de login -->
+                     <button @click="toggleRegister">Já tem uma conta? Login</button>
+                  </div>
+
+                  <!-- Botão para alternar para a visualização de registro -->
+                  <div v-if="!registerActive" class="card">
+                     <button @click="toggleRegister">Não tem uma conta? Registre-se</button>
                   </div>
                </div>
             </div>
@@ -59,7 +66,12 @@
 </template>
 
 <script>
+import { routerLink } from 'vue-router';
+
 export default {
+   components: {
+      routerLink
+   },
    data() {
       return {
          registerActive: false, // Estado para alternar entre login e registro
@@ -72,20 +84,23 @@ export default {
       };
    },
    methods: {
-      doLogin(event) {
-         event.preventDefault(); // Previne o comportamento padrão do botão submit
+      toggleRegister() {
+         this.registerActive = !this.registerActive; // Alterna entre as visualizações de login e registro
+      },
+      doLogin() {
          if (this.emailLogin && this.senhaLogin) {
             // Lógica para realizar o login (pode incluir chamadas de API)
             console.log('Logando com', this.emailLogin, this.senhaLogin);
+            this.emptyFields = false; // Reseta o estado de campos vazios
          } else {
             this.emptyFields = true; // Define que há campos vazios
          }
       },
-      doRegister(event) {
-         event.preventDefault(); // Previne o comportamento padrão do botão submit
+      doRegister() {
          if (this.emailReg && this.senhaReg && this.senhaReg === this.confirmReg) {
             // Lógica para realizar o registro (pode incluir chamadas de API)
             console.log('Registrando com', this.emailReg, this.senhaReg);
+            this.emptyFields = false; // Reseta o estado de campos vazios
          } else {
             this.emptyFields = true; // Define que há campos vazios ou senhas não coincidem
          }
