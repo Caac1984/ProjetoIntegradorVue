@@ -14,13 +14,13 @@
                      <!-- Logo -->
                      <div class="logo-container">
                         <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
-                        <hr>
+                        <hr> <!-- Linha separadora -->
                      </div>
 
                      <!-- Título do card de login -->
                      <h2>Login</h2>
                      <!-- Formulário de login -->
-                     <form class="form-group" @submit.prevent="doLogin">
+                     <form class="form-group">
                         <!-- Input de e-mail -->
                         <input v-model="emailLogin" type="email" class="form-control" placeholder="E-mail" required>
                         <br>
@@ -28,7 +28,7 @@
                         <input v-model="senhaLogin" type="password" class="form-control" placeholder="Senha" required>
                         <br>
                         <!-- Botão de envio do formulário de login -->
-                        <input type="submit" class="btn btn-primary" value="Login">
+                        <input type="submit" class="btn btn-primary" @click="doLogin">
                         <br><br>
                         <!-- Link para redefinição de senha -->
                         <router-link to="/alterarsenha" target="_blank">Esqueceu a senha?</router-link>
@@ -40,7 +40,7 @@
                      <!-- Título do card de registro -->
                      <h1>Sign Up</h1>
                      <!-- Formulário de registro -->
-                     <form class="form-group" @submit.prevent="doRegister">
+                     <form class="form-group">
                         <!-- Input de e-mail para registro -->
                         <input v-model="emailReg" type="email" class="form-control" placeholder="E-mail" required>
                         <!-- Input de senha para registro -->
@@ -48,7 +48,7 @@
                         <!-- Input de confirmação de senha -->
                         <input v-model="confirmReg" type="password" class="form-control" placeholder="Confirma Senha" required>
                         <!-- Botão de envio do formulário de registro -->
-                        <input type="submit" class="btn btn-primary" value="Registrar">
+                        <input type="submit" class="btn btn-primary" @click="doRegister">
                      </form>
                   </div>
                </div>
@@ -62,80 +62,33 @@
 export default {
    data() {
       return {
-         emailLogin: '', // Email para login
-         senhaLogin: '', // Senha para login
-         emailReg: '', // Email para registro
-         senhaReg: '', // Senha para registro
-         confirmReg: '', // Confirmação de senha para registro
-         registerActive: false, // Alternar entre login e registro
-         emptyFields: false // Flag para campos vazios
+         registerActive: false, // Estado para alternar entre login e registro
+         emailLogin: '', // Armazena o e-mail de login
+         senhaLogin: '', // Armazena a senha de login
+         emailReg: '', // Armazena o e-mail de registro
+         senhaReg: '', // Armazena a senha de registro
+         confirmReg: '', // Armazena a confirmação de senha de registro
+         emptyFields: false // Estado para verificar campos vazios
       };
    },
    methods: {
-      doLogin() {
-         // Verifica se os campos estão vazios
-         if (this.emailLogin === '' || this.senhaLogin === '') {
-            this.emptyFields = true;
-            return;
+      doLogin(event) {
+         event.preventDefault(); // Previne o comportamento padrão do botão submit
+         if (this.emailLogin && this.senhaLogin) {
+            // Lógica para realizar o login (pode incluir chamadas de API)
+            console.log('Logando com', this.emailLogin, this.senhaLogin);
+         } else {
+            this.emptyFields = true; // Define que há campos vazios
          }
-         this.emptyFields = false;
-
-         // Lógica para login (pode ser uma chamada a API)
-         console.log('Tentando login com', this.emailLogin, this.senhaLogin);
-         // Exemplo de chamada a API
-         fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-               email: this.emailLogin,
-               senha: this.senhaLogin
-            })
-         })
-         .then(response => response.json())
-         .then(data => {
-            // Lógica para tratar resposta da API
-            console.log('Resposta da API:', data);
-         })
-         .catch(error => {
-            console.error('Erro no login:', error);
-         });
       },
-      doRegister() {
-         // Verifica se os campos estão vazios
-         if (this.emailReg === '' || this.senhaReg === '' || this.confirmReg === '') {
-            this.emptyFields = true;
-            return;
+      doRegister(event) {
+         event.preventDefault(); // Previne o comportamento padrão do botão submit
+         if (this.emailReg && this.senhaReg && this.senhaReg === this.confirmReg) {
+            // Lógica para realizar o registro (pode incluir chamadas de API)
+            console.log('Registrando com', this.emailReg, this.senhaReg);
+         } else {
+            this.emptyFields = true; // Define que há campos vazios ou senhas não coincidem
          }
-         // Verifica se as senhas coincidem
-         if (this.senhaReg !== this.confirmReg) {
-            alert('As senhas não coincidem!');
-            return;
-         }
-         this.emptyFields = false;
-
-         // Lógica para registro (pode ser uma chamada a API)
-         console.log('Tentando registro com', this.emailReg, this.senhaReg);
-         // Exemplo de chamada a API
-         fetch('http://localhost:3000/register', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-               email: this.emailReg,
-               senha: this.senhaReg
-            })
-         })
-         .then(response => response.json())
-         .then(data => {
-            // Lógica para tratar resposta da API
-            console.log('Resposta da API:', data);
-         })
-         .catch(error => {
-            console.error('Erro no registro:', error);
-         });
       }
    }
 };
@@ -144,40 +97,37 @@ export default {
 <style scoped>
 /* Estilos para elementos de texto */
 p {
-   line-height: 1rem;
+   line-height: 1rem; /* Define a altura da linha */
 }
 
 /* Estilos para título h1 */
 h1 {
-   margin-bottom: 1.5rem;
+   margin-bottom: 1.5rem; /* Define a margem inferior */
 }
 
 /* Estilos para cards */
 .card {
-   padding: 20px;
+   padding: 20px; /* Define o espaçamento interno */
 }
 
 /* Estilos para grupos de formulários */
 .form-group {
-
    /* Estilos para inputs dentro do form-group */
    input {
-      margin-bottom: 20px;
-      border-radius: 10px;
+      margin-bottom: 20px; /* Define a margem inferior */
+      border-radius: 10px; /* Define o arredondamento dos cantos */
    }
 }
 
 /* Estilos para a página de login */
 .login-page {
-   align-items: center;
-   display: flex;
-   height: flex;
+   align-items: center; /* Centraliza verticalmente os itens */
+   display: flex; /* Define um layout flexível */
+   height: flex; /* Define a altura como flexível */
 }
 
 .logo {
-   width: 150px;
-   /* Define a largura da logo */
-   height: auto;
-   /* Mantém a altura proporcional para evitar distorções */
+   width: 150px; /* Define a largura da logo */
+   height: auto; /* Mantém a altura proporcional para evitar distorções */
 }
 </style>
