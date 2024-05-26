@@ -50,13 +50,6 @@
                         <!-- Botão de envio do formulário de registro -->
                         <input type="submit" class="btn btn-primary" value="Registrar">
                      </form>
-                     <!-- Botão para alternar para a visualização de login -->
-                     <button @click="toggleRegister">Já tem uma conta? Login</button>
-                  </div>
-
-                  <!-- Botão para alternar para a visualização de registro -->
-                  <div v-if="!registerActive" class="card">
-                     <button @click="toggleRegister">Não tem uma conta? Registre-se</button>
                   </div>
                </div>
             </div>
@@ -96,15 +89,7 @@ export default {
             this.emptyFields = true; // Define que há campos vazios
          }
       },
-      doRegister() {
-         if (this.emailReg && this.senhaReg && this.senhaReg === this.confirmReg) {
-            // Lógica para realizar o registro (pode incluir chamadas de API)
-            console.log('Registrando com', this.emailReg, this.senhaReg);
-            this.emptyFields = false; // Reseta o estado de campos vazios
-         } else {
-            this.emptyFields = true; // Define que há campos vazios ou senhas não coincidem
-         }
-      }
+   
    }
 };
 </script>
