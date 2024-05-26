@@ -1,16 +1,44 @@
 <template>
-  <div class="inicio">
-    <h1>Tarefas</h1>
-  </div>
+  <!-- Componente raiz -->
+  <div>
+    <!-- Componente de menu de navegação -->
+    <MenuNavega />
+
+    <!-- Contêiner da tabela -->
+    <div class="inicio">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="card login">
+           
+              <!-- Título da página -->
+              <h4>Seja bem vindo!</h4>
+              <!-- Descrição da página -->
+              <p>Regras:</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
+import MenuNavega from '@/components/MenuNavega.vue';
 
 export default {
-  name: 'InicioView',
   components: {
-  }
+    MenuNavega
+  },
 }
 </script>
+
+<style scoped>
+
+
+.card {
+  padding: 20px;
+}
+
+</style>

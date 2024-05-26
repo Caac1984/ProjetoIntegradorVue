@@ -67,6 +67,12 @@ const routes = [
     component: () =>
       import("../views/FinalistasView.vue"),
   },
+  {
+    path: "/inicio",
+    name: "inicio",
+    component: () =>
+      import("../views/InicioView.vue"),
+  },
  
 ];
 
