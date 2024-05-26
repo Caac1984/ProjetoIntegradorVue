@@ -10,11 +10,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-9 col-md-9 col-sm-9">
             <div class="card login">
-              <!-- Container do logo -->
-              <div class="logo-container">
-                <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
-                <hr> <!-- Linha separadora -->
-              </div>
+              
               <!-- Título da página -->
               <h4>Lista de Cadastros:</h4>
 
@@ -124,11 +120,6 @@ h1 {
   margin-bottom: 5px;
 }
 
-.logo {
-  width: 150px;
-  height: auto;
-}
-
 /* Estilos para elementos de texto */
 p {
   line-height: 1rem;
@@ -150,10 +141,4 @@ h1 {
   border-radius: 10px;
 }
 
-/* Estilos para a página de login */
-.login-page {
-  align-items: center;
-  display: flex;
-  height: flex;
-}
 </style>

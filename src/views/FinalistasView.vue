@@ -1,67 +1,88 @@
 <template>
-   <div class="cadAluno">
-     <h1>Cadastro do Aluno:</h1>
-     <div class="mb-3">
-       <label for="nome" class="form-label">Nome:</label>
-       <input type="text" id="nome" class="form-control" v-model="nome" placeholder="Nome" />
-     </div>
-     <div class="mb-3">
-       <label for="sobrenome" class="form-label">Sobrenome:</label>
-       <input type="text" id="sobrenome" class="form-control" v-model="sobrenome"
-        placeholder="Sobrenome" />
-     </div>
-     <div class="mb-3">
-       <label for="email" class="form-label">E-mail:</label>
-       <input type="text" id="email" class="form-control" v-model="email"
-        placeholder="E-mail" />
-     </div>
-     <div class="mb-3">
-       <label for="telefone" class="form-label">Telefone:</label>
-       <input type="text" id="telefone" class="form-control" v-model="telefone"
-        placeholder="Telefone" />
-     </div>
-     <div class="mb-3">
-       <label for="disciplina" class="form-label">Disciplina:</label>
-       <input type="text" id="disciplina" class="form-control" v-model="disciplina"
-        placeholder="Disciplina" />
-     </div>
-     <div class="mb-3">
-       <label for="matricula" class="form-label">Matricula:</label>
-       <input type="text" id="matricula" class="form-control" v-model="matricula"
-        placeholder="Matricula" />
-     </div>
-     <div class="mb-3">
-       <button class="btn btn-primary" @click="salvar">Salvar</button>
-     </div>
-   </div>
- </template>
- 
- <script>
- export default {
-   data() {
-     return {
-       nome: "",
-       sobrenome: "",
-     };
-   },
-   methods: {
-     salvar() {
-       // Aqui você pode adicionar a lógica para salvar os dados
-       console.log("Nome:", this.nome);
-       console.log("Sobrenome:", this.sobrenome);
-       // Redirecionar ou fazer outras operações após salvar
-     },
-   },
- };
- </script>
- 
- <style scoped>
- h1 {
-   color: black;
- }
- 
- .form-label {
-   margin-bottom: 5px;
- }
- </style>
- 
+  <div>
+  <!-- Componente de menu de navegação -->
+  <MenuNavega />
+  <div class="finalistas">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-9 col-sm-9">
+          <div class="card login">
+            <div class="tex1">Finalistas <div class="tex2">Maiores Pontuações dos Projetos.</div>
+            </div>
+            <div class="pontuacoes-container">
+              <b-table striped hover :items="maioresPontuacoes" :fields="fields"></b-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</template>
+
+<script>
+import MenuNavega from '@/components/MenuNavega.vue';
+
+export default {
+  components: {
+    MenuNavega
+  },
+
+  data() {
+    return {
+      maioresPontuacoes: [], // Array para armazenar as maiores pontuações
+      fields: [ // Configuração das colunas da tabela
+        { key: 'projeto', label: 'Projeto' },
+        { key: 'pontuacao', label: 'Pontuação' }
+      ],
+    };
+  },
+
+  created() {
+    this.fetchMaioresPontuacoes(); // Busca as maiores pontuações ao carregar o componente
+  },
+
+  methods: {
+    // Método para buscar as três maiores pontuações
+    fetchMaioresPontuacoes() {
+      fetch('http://localhost:3000/maioresPontuacoes')
+        .then(response => response.json())
+        .then(data => {
+          this.maioresPontuacoes = data;
+        })
+        .catch(error => {
+          console.error('Erro ao buscar maiores pontuações:', error);
+        });
+    }
+  }
+};
+</script>
+
+<style scoped>
+.maiores-pontuacoes {
+  padding: 20px;
+}
+
+.pontuacoes-container {
+  margin-top: 20px;
+}
+
+.tex1 {
+  font-size: 50px;
+  color: black;
+}
+
+.tex2 {
+  font-size: 20px;
+  color: black;
+}
+
+.form-label {
+  margin-bottom: 5px;
+}
+
+.card {
+  padding: 20px;
+}
+
+</style>

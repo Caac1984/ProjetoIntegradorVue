@@ -61,6 +61,12 @@ const routes = [
     component: () =>
       import("../views/TabelasView.vue"),
   },
+  {
+    path: "/finalistas",
+    name: "finalistas",
+    component: () =>
+      import("../views/FinalistasView.vue"),
+  },
  
 ];
 

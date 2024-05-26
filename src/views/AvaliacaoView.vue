@@ -10,11 +10,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-9 col-md-9 col-sm-9">
             <div class="card login">
-              <!-- Container do logo -->
-              <div class="logo-container">
-                <img src="@/assets/logo.png" alt="Logo da sua empresa" class="logo">
-                <hr> <!-- Linha separadora -->
-              </div>
+           
               <!-- Título da página -->
               <h4>Avaliação:</h4>
 
@@ -38,6 +34,14 @@
                 <!-- Mensagem para quando nenhum item estiver selecionado -->
                 <p>Por favor, selecione uma opção.</p>
               </div>
+              
+              <!-- Detalhes do projeto selecionado -->
+              <div v-if="selectedProjeto" class="mt-3">
+                <h5>Projeto Selecionado:</h5>
+                <p><strong>Nome do Projeto:</strong> {{ selectedProjetoDetails.nome }}</p>
+                <p><strong>Descrição:</strong> {{ selectedProjetoDetails.descricao }}</p>
+                <!-- Outros detalhes do projeto podem ser adicionados aqui -->
+              </div>
             </div>
           </div>
         </div>
@@ -45,6 +49,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import MenuNavega from '@/components/MenuNavega.vue';
@@ -58,20 +63,34 @@ export default {
     return {
       selectedCurso: null, // Curso selecionado no campo de seleção
       selectedProjeto: null, // Projeto selecionado no campo de seleção
-      optionsCurso: [ // Opções para o campo de seleção de curso
-        { value: null, text: 'Por favor, selecione um curso:' },
-        { value: 'this.selectedCurso', text: '' },
-      ],
+      optionsCurso: [], // Opções para o campo de seleção de curso
       optionsProjeto: [], // Opções para o campo de seleção de projeto
-      cadcadastros: [], // Array de cadastros
+      cadastros: [], // Array de cadastros
       fields: [ // Configuração das colunas da tabela
         { key: 'curso', label: 'Curso'},
         { key: 'projeto', label: 'Projeto'},
       ],
+      selectedProjetoDetails: {} // Detalhes do projeto selecionado
     };
   },
 
+  created() {
+    this.fetchCursos(); // Busca os cursos ao carregar o componente
+  },
+
   methods: {
+    // Método para buscar os cursos ao carregar o componente
+    fetchCursos() {
+      fetch('http://localhost:3000/cursos')
+        .then(response => response.json())
+        .then(data => {
+          this.optionsCurso = data.map(curso => ({ value: curso.id, text: curso.nome }));
+        })
+        .catch(error => {
+          console.error('Erro ao buscar cursos:', error);
+        });
+    },
+
     // Método para buscar os projetos quando o curso selecionado muda
     fetchProjetos() {
       if (this.selectedCurso) {
@@ -97,12 +116,29 @@ export default {
           .then(response => response.json())
           .then(data => {
             this.cadastros = data;
+            this.fetchProjetoDetails(); // Busca os detalhes do projeto selecionado
           })
           .catch(error => {
             console.error('Erro ao buscar cadastros:', error);
           });
       } else {
         this.cadastros = [];
+      }
+    },
+
+    // Método para buscar os detalhes do projeto selecionado
+    fetchProjetoDetails() {
+      if (this.selectedProjeto) {
+        fetch(`http://localhost:3000/projetos/details/${this.selectedProjeto}`)
+          .then(response => response.json())
+          .then(data => {
+            this.selectedProjetoDetails = data;
+          })
+          .catch(error => {
+            console.error('Erro ao buscar detalhes do projeto:', error);
+          });
+      } else {
+        this.selectedProjetoDetails = {};
       }
     },
 
@@ -118,6 +154,8 @@ export default {
   }
 };
 </script>
+
+
 
 <style scoped>
 /* Estilos CSS específicos para este componente */
