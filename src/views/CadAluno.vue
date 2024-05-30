@@ -61,6 +61,7 @@
 
 <script>
 import BarraNavegao from '@/components/BarraNavegao.vue'
+import AuthService from "@/services/AuthService";
 
 export default {
   components: {
@@ -69,28 +70,65 @@ export default {
 
   data() {
     return {
-      nome: "", // Armazena o nome do aluno
-      sobrenome: "", // Armazena o sobrenome do aluno
-      email: "", // Armazena o email do aluno
-      telefone: "", // Armazena o telefone do aluno
-      disciplina: "", // Armazena a disciplina do aluno
-      matricula: "", // Armazena a matrícula do aluno
-      projeto: "", // Armazena o projeto do aluno
+      usuarios: [{
+        nome: "", // Armazena o nome do aluno
+        sobrenome: "", // Armazena o sobrenome do aluno
+        email: "", // Armazena o email do aluno
+        telefone: "", // Armazena o telefone do aluno
+        disciplina: "", // Armazena a disciplina do aluno
+        matricula: "", // Armazena a matrícula do aluno
+        projeto: "", // Armazena o projeto do aluno
+      }],
+      user: {
+        login: null,
+        senha: null,
+      },
     };
   },
-  methods: {
-    salvar() {
-      // Função para salvar os dados
-      // Adicione a lógica para salvar os dados conforme necessário
-      console.log("Nome:", this.nome);
-      console.log("Sobrenome:", this.sobrenome);
-      console.log("Email:", this.email);
-      console.log("Telefone:", this.telefone);
-      console.log("Disciplina:", this.disciplina);
-      console.log("Matricula:", this.matricula);
-      console.log("Projeto:", this.projeto);
-    },
+
+  mounted() {
+    console.log(AuthService.dados.token);
+    this.getUsuarios();
   },
+
+  methods: {
+  async getUsuarios() {
+   try {
+    let r = await fetch("http://localhost:8080/users", {
+     method: "GET",
+     headers: { Authorization: `Bearer ${AuthService.dados.token}` },
+    });
+    r.json().then((j) => {
+     this.usuarios = j;
+    });
+   } catch (ex) {
+    console.log("ERRO", ex);
+   }
+  },
+  async salvar() {
+   if (this.user.login != null && this.user.senha != null) {
+    fetch("http://localhost:8080/users", {
+     method: "POST",
+     body: JSON.stringify(this.user),
+     headers: {
+      Authorization: `Bearer ${AuthService.dados.token}`,
+      "Content-Type": "application/json",
+     },
+    })
+     .then((r) => {
+      if (r.status != 200 || r.status != 201) {
+       r.json().then((j) => {
+        console.log("ERRO", j);
+       });
+      }
+      this.getUsuarios();
+     })
+     .catch((e) => {
+      console.log("ERRO", e);
+     });
+   }
+  },
+ },
 };
 </script>
 
@@ -123,7 +161,9 @@ h1 {
 fieldset {
   background-color: rgba(0, 19, 3) !important;
   border-radius: 8px !important;
-  margin: 0 auto; /* Centraliza o fieldset horizontalmente */
-  width: 50%; /* Define a largura do fieldset */
+  margin: 0 auto;
+  /* Centraliza o fieldset horizontalmente */
+  width: 50%;
+  /* Define a largura do fieldset */
 }
 </style>

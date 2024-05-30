@@ -22,10 +22,10 @@
                      <!-- Formulário de login -->
                      <form class="form-group" >
                         <!-- Input de e-mail -->
-                        <input v-model="Login" type="login" class="form-control" placeholder="Matrícula" required>
+                        <input v-model="login" type="login" class="form-control" placeholder="Matrícula" required>
                         <br>
                         <!-- Input de senha -->
-                        <input v-model="senhaLogin" type="password" class="form-control" placeholder="Senha" required>
+                        <input v-model="senha" type="senha" class="form-control" placeholder="Senha" required>
                         <br>
                         <!-- Botão de envio do formulário de login -->
                         <input type="submit" class="btn btn-primary" value="Login">
@@ -44,7 +44,7 @@
                         <!-- Input de e-mail para registro -->
                         <input v-model="loginReg" type="login" class="form-control" placeholder="Login" required>
                         <!-- Input de senha para registro -->
-                        <input v-model="senhaReg" type="password" class="form-control" placeholder="Senha" required>
+                        <input v-model="senhaReg" type="senha" class="form-control" placeholder="Senha" required>
                         <!-- Input de confirmação de senha -->
                         <input v-model="confirmReg" type="password" class="form-control" placeholder="Confirma Senha" required>
                         <!-- Botão de envio do formulário de registro -->
@@ -60,44 +60,23 @@
 </template>
 
 <script>
-import { routerLink } from 'vue-router';
 import LoginService from "@/services/LoginService";
 
-
 export default {
-   components: {
-      routerLink
-   },
-   data() {
-      return {
-         registerActive: false, // Estado para alternar entre login e registro
-         login: '', // Armazena o e-mail de login
-         senhaLogin: '', // Armazena a senha de login
-         loginReg: '', // Armazena o login de registro
-         senhaReg: '', // Armazena a senha de registro
-         confirmReg: '', // Armazena a confirmação de senha de registro
-         emptyFields: false // Estado para verificar campos vazios
-      };
-   },
-   methods: {
-      toggleRegister() {
-         this.registerActive = !this.registerActive; // Alterna entre as visualizações de login e registro
-      },
-      doLogin() {
-         if (this.emailLogin && this.senhaLogin) {
-            // Lógica para realizar o login (pode incluir chamadas de API)
-            console.log('Logando com', this.login, this.senhaLogin);
-            this.emptyFields = false; // Reseta o estado de campos vazios
-         } else {
-            this.emptyFields = true; // Define que há campos vazios
-         }
-      },
+  data() {
+    return {
+      login: "",
+      senha: "",
+    };
+  },
+  mounted() {
 
-      logar() {
+  },
+  methods: {
+    logar() {
       LoginService.logar(this.login, this.senha);
     },
-   
-   }
+  },
 };
 </script>
 
