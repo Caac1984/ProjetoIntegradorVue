@@ -1,7 +1,7 @@
 <template>
   <div>
   <!-- Componente de menu de navegação -->
-  <MenuNavega />
+  <BarraNavegao />
   <div class="finalistas">
     <div class="container">
       <div class="row justify-content-center">
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import MenuNavega from '@/components/MenuNavega.vue';
+import BarraNavegao from '@/components/BarraNavegao.vue';
 
 export default {
   components: {
-    MenuNavega
+    BarraNavegao
   },
 
   data() {

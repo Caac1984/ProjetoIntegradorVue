@@ -2,7 +2,7 @@
   <!-- Componente raiz -->
   <div>
     <!-- Componente de menu de navegação -->
-    <MenuNavega />
+    <BarraNavegao />
 
     <!-- Contêiner da tabela -->
     <div class="inicio">
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import MenuNavega from '@/components/MenuNavega.vue';
+import BarraNavegao from '@/components/BarraNavegao.vue';
 
 export default {
   components: {
-    MenuNavega
+    BarraNavegao
   },
 }
 </script>

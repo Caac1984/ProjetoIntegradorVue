@@ -1,6 +1,6 @@
 <template>
-  <!-- Inclui o componente MenuNavega -->
-  <MenuNavega />
+  <!-- Inclui o componente BarraNavegao -->
+  <BarraNavegao />
   <div class="cadCurso p-3">
     <!-- Agrupamento do formulário -->
     <fieldset class="p-3 col-sm-12 col-md-4">
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import MenuNavega from '@/components/MenuNavega.vue'
+import BarraNavegao from '@/components/BarraNavegao.vue'
 
 export default {
   components: {
-    MenuNavega // Importa e registra o componente MenuNavega
+    BarraNavegao // Importa e registra o componente BarraNavegao
   },
 
   data() {

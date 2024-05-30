@@ -20,9 +20,9 @@
                      <!-- Título do card de login -->
                      <h2>Login</h2>
                      <!-- Formulário de login -->
-                     <form class="form-group" @submit.prevent="doLogin">
+                     <form class="form-group" >
                         <!-- Input de e-mail -->
-                        <input v-model="emailLogin" type="email" class="form-control" placeholder="E-mail" required>
+                        <input v-model="Login" type="login" class="form-control" placeholder="Matrícula" required>
                         <br>
                         <!-- Input de senha -->
                         <input v-model="senhaLogin" type="password" class="form-control" placeholder="Senha" required>
@@ -31,7 +31,7 @@
                         <input type="submit" class="btn btn-primary" value="Login">
                         <br><br>
                         <!-- Link para redefinição de senha -->
-                        <router-link to="/alterarsenha" target="_blank">Esqueceu a senha?</router-link>
+                        <router-link to="/alterarsenha" target="_blank"></router-link>
                      </form>
                   </div>
 
@@ -40,9 +40,9 @@
                      <!-- Título do card de registro -->
                      <h1>Sign Up</h1>
                      <!-- Formulário de registro -->
-                     <form class="form-group" @submit.prevent="doRegister">
+                     <form class="form-group" >
                         <!-- Input de e-mail para registro -->
-                        <input v-model="emailReg" type="email" class="form-control" placeholder="E-mail" required>
+                        <input v-model="loginReg" type="login" class="form-control" placeholder="Login" required>
                         <!-- Input de senha para registro -->
                         <input v-model="senhaReg" type="password" class="form-control" placeholder="Senha" required>
                         <!-- Input de confirmação de senha -->
@@ -55,11 +55,14 @@
             </div>
          </div>
       </div>
+      {{ logado }}
    </div>
 </template>
 
 <script>
 import { routerLink } from 'vue-router';
+import LoginService from "@/services/LoginService";
+
 
 export default {
    components: {
@@ -68,9 +71,9 @@ export default {
    data() {
       return {
          registerActive: false, // Estado para alternar entre login e registro
-         emailLogin: '', // Armazena o e-mail de login
+         login: '', // Armazena o e-mail de login
          senhaLogin: '', // Armazena a senha de login
-         emailReg: '', // Armazena o e-mail de registro
+         loginReg: '', // Armazena o login de registro
          senhaReg: '', // Armazena a senha de registro
          confirmReg: '', // Armazena a confirmação de senha de registro
          emptyFields: false // Estado para verificar campos vazios
@@ -83,12 +86,16 @@ export default {
       doLogin() {
          if (this.emailLogin && this.senhaLogin) {
             // Lógica para realizar o login (pode incluir chamadas de API)
-            console.log('Logando com', this.emailLogin, this.senhaLogin);
+            console.log('Logando com', this.login, this.senhaLogin);
             this.emptyFields = false; // Reseta o estado de campos vazios
          } else {
             this.emptyFields = true; // Define que há campos vazios
          }
       },
+
+      logar() {
+      LoginService.logar(this.login, this.senha);
+    },
    
    }
 };

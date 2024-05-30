@@ -1,6 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import LoginView from "../views/LoginView.vue";
 
+import LoginService from '../services/LoginService'
+import AuthService from '@/services/AuthService'
+
 const routes = [
   {
     path: "/",
@@ -82,8 +85,21 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
-  console.log(from.name + " -> " + to.name);
+  LoginService.router = router;
+
+  console.log(`de ${from.name} para ${to.name}`);
+
+
+  if (!LoginService.estaAutenticado() && to.name != 'login') {
+    return { name: 'login' }
+  }
+
+  if (!AuthService.validaPermissao(to.path)) {
+    router.push('/nao-autorizado')
+    return false;
+  }
+
   return true;
-});
+})
 
 export default router;

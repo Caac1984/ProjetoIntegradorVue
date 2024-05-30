@@ -1,6 +1,6 @@
 <template>
    <!-- Inclui o componente de navegação -->
-   <MenuNavega />
+   <BarraNavegao />
    <!-- Início do formulário de cadastro do professor -->
    <div class="cadVisitante p-3">
       <!-- Agrupamento do formulário -->
@@ -60,12 +60,12 @@
 </template>
 
 <script>
-import MenuNavega from '@/components/MenuNavega.vue'
+import BarraNavegao from '@/components/BarraNavegao.vue'
 
 export default {
    components: {
-      // Registra o componente MenuNavega
-      MenuNavega
+      // Registra o componente BarraNavegao
+      BarraNavegao
    },
    data() {
       return {
